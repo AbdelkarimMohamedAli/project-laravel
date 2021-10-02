@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html>
 <html>
 
@@ -45,7 +44,10 @@
         <a href="{{ url('Student/Logout') }}">LogOut</a>    ||    <a href="{{ url('/Users/create') }}">create</a>
         <br>
         <a href="{{ url('Tasks') }}">Tasks</a>
+        <br>
+
         </div>
+
 
 
         {{ session()->get('Message') }}   

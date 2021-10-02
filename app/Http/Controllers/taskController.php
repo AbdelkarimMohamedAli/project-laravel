@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tasks;
-
+use Carbon\Carbon;
+use DateTime;
 class taskController extends Controller
 {
     /**
@@ -19,9 +20,21 @@ class taskController extends Controller
     }
     public function index()
     {
-        //
+        $dt = new DateTime();
+       // dd($dt->format('Y-m-d'));
+       // $data=tasks::where('todate','<',$dt->format('Y-m-d'))->get();
+        //dd(Carbon::now()->format('d-m-Y'));
         $data=tasks::get();
-        return view('task.index',['data'=> $data]);
+          return view('task.index',['data'=> $data]);
+
+          
+
+       /* if(Carbon::now()->format('d-m-Y') > $data->todate{
+          return view('task.index',['data'=> $data]);
+        }else{
+          
+        }*/
+        
     }
 
     /**
@@ -85,7 +98,8 @@ class taskController extends Controller
     public function edit($id)
     {
         //
-        $data = tasks:: where('id',$id)->get();   
+        $data = tasks:: where('id',$id)->get();
+        //$data = tasks:: find($id)->get();   
         return view('task.edit',['data' => $data]);
     }
 

@@ -76,10 +76,19 @@
                 <td>{{$fetchedData->title  }}</td>
                 <td>{{$fetchedData->fromdate  }}</td>
                 <td>{{$fetchedData->todate  }}</td>
+                <?php 
+                    /*$mytime = Carbon\Carbon::now();
+                    echo $mytime;*/
+                    //echo $mytime->toDateTimeString();
+                      $dt = new DateTime();
+                   // echo $dt->format('Y-m-d');
+                ?>
+                @if($fetchedData->todate <  $dt->format('Y-m-d') )
                 <td>
                     <a href=''   data-toggle="modal" data-target="#modal_single_del{{$fetchedData->id  }}"  class='btn btn-danger m-r-1em'>Delete</a>
                     <a href='{{ url('/Tasks/'.$fetchedData->id.'/edit') }}' class='btn btn-primary m-r-1em'>Edit</a>
                 </td>
+                @endif
 
             </tr>
 

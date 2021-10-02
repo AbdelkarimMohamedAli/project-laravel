@@ -30,6 +30,7 @@ Route::post('Student/doLogin','studentController@doLogin');
 Route::get('Student/Logout','studentController@logOut');
 
 
+
 /*
  /Users  (get)           Route::get('Users','studentResourceController@index')
  /Users/create (get)     Route::get('Users/create','studentResourceController@create')

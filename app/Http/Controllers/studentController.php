@@ -26,8 +26,10 @@ class studentController extends Controller
     {
         //
         $data=student::get();
+        
         return view('student.index',['data'=> $data]);
     }
+    
 
     /**
      * Show the form for creating a new resource.
