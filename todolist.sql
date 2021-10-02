@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2021 at 08:36 AM
+-- Generation Time: Oct 02, 2021 at 05:47 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.2.34
 
@@ -32,6 +32,7 @@ CREATE TABLE `tasks` (
   `title` char(60) NOT NULL,
   `fromdate` date NOT NULL,
   `todate` date NOT NULL,
+  `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -40,9 +41,10 @@ CREATE TABLE `tasks` (
 -- Dumping data for table `tasks`
 --
 
-INSERT INTO `tasks` (`id`, `title`, `fromdate`, `todate`, `created_at`, `updated_at`) VALUES
-(1, 'task1', '2021-09-01', '2021-09-04', '2021-09-30 03:47:44', '2021-09-30 04:00:11'),
-(3, 'task2', '2021-09-24', '2021-09-25', '2021-09-30 04:13:29', '2021-09-30 04:13:29');
+INSERT INTO `tasks` (`id`, `title`, `fromdate`, `todate`, `user_id`, `created_at`, `updated_at`) VALUES
+(1, 'task1', '2021-10-02', '2021-10-03', 1, '2021-10-02 13:18:31', '2021-10-02 13:18:31'),
+(2, 'task2', '2021-11-02', '2021-11-04', 2, '2021-10-02 15:34:48', '2021-10-02 15:34:48'),
+(3, 'task5', '2021-09-02', '2021-09-02', 1, '2021-10-02 15:37:22', '2021-10-02 15:37:22');
 
 -- --------------------------------------------------------
 
@@ -64,7 +66,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'karimali', 'karimali@gmail.com', '$2y$10$isxaF72nFqfDNi5QRxnGlOlhsN.TP9g9s3ST/TRT3WxklxjaNV7mi', '2021-09-30 01:43:51', '2021-09-30 02:54:45');
+(1, 'Abdelkarim', 'Abdelkarim@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', '2021-10-02 13:04:58', '2021-10-02 13:04:58'),
+(2, 'karimali', 'karimali@gmail.com', '$2y$10$0ps3YJc8G9JzDQC05vMW/eUSYMo.OYcLqPn3EvT.CmC.Xy2VkkyS6', '2021-10-02 13:07:08', '2021-10-02 13:07:08');
 
 --
 -- Indexes for dumped tables
@@ -74,7 +77,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_a
 -- Indexes for table `tasks`
 --
 ALTER TABLE `tasks`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_task` (`user_id`);
 
 --
 -- Indexes for table `users`
@@ -97,6 +101,16 @@ ALTER TABLE `tasks`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `tasks`
+--
+ALTER TABLE `tasks`
+  ADD CONSTRAINT `user_task` FOREIGN KEY (`user_id`) REFERENCES `tasks` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
