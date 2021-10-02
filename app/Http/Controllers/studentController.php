@@ -15,11 +15,11 @@ class studentController extends Controller
      */
 
 
-    /*public function __construct(){
+    public function __construct(){
  
       $this->middleware('studentResource',['except' => ['login','doLogin','create'] ]);
 
-    }*/
+    }
 
 
     public function index()
