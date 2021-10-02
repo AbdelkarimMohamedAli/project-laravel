@@ -15,11 +15,11 @@ class studentController extends Controller
      */
 
 
-    public function __construct(){
+    /*public function __construct(){
  
-      $this->middleware('studentResource',['except' => ['login','doLogin'] ]);
+      $this->middleware('studentResource',['except' => ['login','doLogin','create'] ]);
 
-    }
+    }*/
 
 
     public function index()
@@ -54,6 +54,7 @@ class studentController extends Controller
     public function store(Request $request)
     {
         //
+
         $data =    $this->validate($request,[
             "name"     => "required|min:6",
             "email"    => "required|email",
@@ -73,7 +74,7 @@ class studentController extends Controller
 
   session()->flash('Message',$message);
 
-  return redirect(url('/Users'));
+ // return redirect(url('/Users'));
     }
 
     /**

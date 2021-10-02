@@ -61,12 +61,11 @@
                 <th>Title</th>
                 <th>fromdate</th>
                 <th>todate</th>
+                <th>User</th>
                 <th>action</th>
 
             </tr>
 <?php $i= 1;?>
-
-
 @foreach ($data as $fetchedData )
             <tr>
 
@@ -76,6 +75,7 @@
                 <td>{{$fetchedData->title  }}</td>
                 <td>{{$fetchedData->fromdate  }}</td>
                 <td>{{$fetchedData->todate  }}</td>
+                <td>{{$fetchedData->name  }}</td>
                 <?php 
                     /*$mytime = Carbon\Carbon::now();
                     echo $mytime;*/
@@ -83,7 +83,7 @@
                       $dt = new DateTime();
                    // echo $dt->format('Y-m-d');
                 ?>
-                @if($fetchedData->todate <  $dt->format('Y-m-d') )
+                @if($fetchedData->todate >  $dt->format('Y-m-d') )
                 <td>
                     <a href=''   data-toggle="modal" data-target="#modal_single_del{{$fetchedData->id  }}"  class='btn btn-danger m-r-1em'>Delete</a>
                     <a href='{{ url('/Tasks/'.$fetchedData->id.'/edit') }}' class='btn btn-primary m-r-1em'>Edit</a>
@@ -128,6 +128,7 @@
 
             <!-- end table -->
         </table>
+        {{ $data->links('pagination.pages') }}
     </div>
     <!-- end .container -->
 

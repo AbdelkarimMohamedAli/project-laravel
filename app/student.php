@@ -11,4 +11,10 @@ class student extends Model
 
    protected $fillable = ['name','email','password'];
 
+   public  function studens(){
+
+    return   $this->hasMany('App\tasks','user_id');   
+}
+   
+
 }

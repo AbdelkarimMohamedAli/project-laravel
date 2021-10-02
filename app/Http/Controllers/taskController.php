@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\tasks;
+use App\student;
 use Carbon\Carbon;
 use DateTime;
 class taskController extends Controller
@@ -24,7 +25,17 @@ class taskController extends Controller
        // dd($dt->format('Y-m-d'));
        // $data=tasks::where('todate','<',$dt->format('Y-m-d'))->get();
         //dd(Carbon::now()->format('d-m-Y'));
-        $data=tasks::get();
+
+        //$data = tasks::select('tasks.*','users.*')->join('users','users.id','=','tasks.user_id');
+       //$data=tasks::get();
+       //$obj = new tasks();
+        //$data = $obj->doQuery();
+       //$data = tasks::select('tasks.*','users.title')->join('users','users.id','=','tasks.user_id')->orderby('id','desc');
+       /*$obj = new tasks();
+        $data = $obj->doQuery();*/
+        //$obj = new student();
+        //$data=$obj->studens();
+        $data = tasks::select('tasks.*','users.name')->join('users','users.id','=','tasks.user_id')->orderby('id','desc')->paginate(10); 
           return view('task.index',['data'=> $data]);
 
           
@@ -45,7 +56,8 @@ class taskController extends Controller
     public function create()
     {
         //
-        return view('task.create');
+        $Users=student::get();
+        return view('task.create',['Users' => $Users]);
     }
 
     /**
@@ -59,6 +71,7 @@ class taskController extends Controller
         //
         $data =    $this->validate($request,[
             "title"     => "required",
+            "user_id"     => "required",
             "fromdate"    => "required|date",
             "todate" => "required|date",
       ]);

@@ -50,6 +50,19 @@
     <input type="date" name="todate"   value="{{ old('todate') }}"   class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
 
+  <div class="form-group">
+    <label for="exampleInputPassword1">users</label>
+    <select  name="user_id"   class="form-control" >
+    
+      @foreach ($Users as $User)
+      <option value="{{ $User->id }}">{{ $User->name }}</option>
+          
+      @endforeach
+    
+    
+    </select> 
+  </div>
+
 
   
   
